@@ -1,1 +1,3 @@
 # GoodreadsBot
+
+A reddit bot.
