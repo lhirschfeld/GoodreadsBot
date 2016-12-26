@@ -38,8 +38,11 @@ def respond(lim, rate, subs):
                             reply += " ^Reply ^to ^me ^with ^up ^to ^7 ^[[item ^names]]."
                             reply += " ^Please ^contact ^/u/liortulip"
                             reply += " ^with ^any ^questions ^or ^concerns."
-                            print("Replying...", end=" ")
-                            com.reply(reply)
+                            try:
+                                com.reply(reply)
+                            except praw.exceptions.APIException as error:
+                                print("Hit rate limit error.")
+                                time.sleep(600)
                             print("Replied")
                         else:
                             print("False Reply ^")
