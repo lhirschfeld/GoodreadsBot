@@ -41,7 +41,7 @@ def respond(lim, rate, subs):
                                 com.reply(reply)
                             except praw.exceptions.APIException as error:
                                 print("Hit rate limit error.")
-                                time.sleep(600)
+                                sleep(600)
                                 com.reply(reply)
                             print("Replied")
                         else:
