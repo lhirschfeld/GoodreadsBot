@@ -7,7 +7,7 @@ from lookup import findItem
 
 r = praw.Reddit('bot2')
 
-m = re.compile(r"Info:.*")
+m = re.compile(r"[Ii]nfo:.*")
 
 def respond(lim, rate, subs):
     with open('ids.pickle', 'rb') as handle:
@@ -19,7 +19,7 @@ def respond(lim, rate, subs):
                 comment_queue = submission.comments[:]
                 while comment_queue:
                     com = comment_queue.pop(0)
-                    if "Info:" in com.body and com.id not in ids:
+                    if ("Info:" in com.body or "info:" in com.body) and com.id not in ids:
                         print("Found Comment:" + com.id)
                         reply = ""
                         for item in m.findall(com.body)[:10]:
@@ -33,7 +33,7 @@ def respond(lim, rate, subs):
                                     reply += "\n\n---------\n\n"
                                 sleep(1)
                         if reply != "":
-                            reply += " ^I ^am ^a ^bot."
+                            reply += " ^All ^data ^from ^goodreads.com. ^I ^am ^a ^bot."
                             reply += " ^Reply ^to ^me ^with ^up ^to ^7 ^[[item ^names]]."
                             reply += " ^Please ^contact ^/u/liortulip"
                             reply += " ^with ^any ^questions ^or ^concerns."
@@ -52,4 +52,4 @@ def respond(lim, rate, subs):
             pickle.dump(ids, handle, protocol=pickle.HIGHEST_PROTOCOL)
         sleep(rate)
 
-respond(50,10, ["test"])
+respond(50,10, ["fantasy"])

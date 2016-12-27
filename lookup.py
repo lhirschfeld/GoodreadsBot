@@ -54,6 +54,5 @@ def findItem(name):
     if "Librarian's note" in description:
         description = description[:description.index("Librarian's note")]
 
-    response += "\n\nFrom goodreads.com,"
     response += "\n\n" + '>[](#s "' + description + '")'
     return response
