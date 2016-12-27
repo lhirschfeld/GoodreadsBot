@@ -1,5 +1,4 @@
 import re
-from bs4 import BeautifulSoup
 from time import sleep
 import pickle
 
@@ -43,6 +42,7 @@ def respond(lim, rate, subs):
                             except praw.exceptions.APIException as error:
                                 print("Hit rate limit error.")
                                 time.sleep(600)
+                                com.reply(reply)
                             print("Replied")
                         else:
                             print("False Reply ^")
