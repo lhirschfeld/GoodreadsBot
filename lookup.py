@@ -47,7 +47,7 @@ def findItem(name):
     data = xmltodict.parse(r.text)
     description = data.popitem()[1]["book"]["description"]
     #HTML to reddit formatting
-    description = description.replace("<br /", "\n")
+    description = description.replace("<br /><br />", '")\n\n>[](#s "')
     description = description.replace("<i>", "").replace("</i>", "")
     description = description.replace("<b>", "").replace("</b>", "")
 
