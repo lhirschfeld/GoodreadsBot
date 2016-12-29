@@ -36,7 +36,7 @@ def findItem(name):
     response += "\n\n"
     response += " ^Written ^by ^*" + "* ^*".join(book["author"]["name"].split()) + "*"
     response += " ^| ^Published ^in ^" + stats["original_publication_year"].popitem()[1]
-    response += " ^[[Goodreads]]"
+    response += " ^[[Book]]"
     response += "(http://www.goodreads.com/book/show/" + bookID + ")"
     response += " ^[[Author]]"
     response += "(http://www.goodreads.com/author/show/" + authorID + ")"
@@ -47,12 +47,13 @@ def findItem(name):
     data = xmltodict.parse(r.text)
     description = data.popitem()[1]["book"]["description"]
     #HTML to reddit formatting
-    description = description.replace("<br /><br />", '")\n\n>[](#s "')
+    description = description.replace("<br /><br />", '"\n\n>')
+    description = description.replace("<br />", "")
     description = description.replace("<i>", "").replace("</i>", "")
     description = description.replace("<b>", "").replace("</b>", "")
 
     if "Librarian's note" in description:
         description = description[:description.index("Librarian's note")]
 
-    response += "\n\n" + '>[](#s "' + description + '")'
+    response += "\n\n" + '>' + description
     return response

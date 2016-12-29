@@ -15,11 +15,15 @@ def respond(lim, rate, subs):
     while True:
         for sub in subs:
             subreddit = r.subreddit(sub)
-            for submission in subreddit.new(limit=lim):
+            for submission in subreddit.hot(limit=lim):
                 comment_queue = submission.comments[:]
                 while comment_queue:
                     com = comment_queue.pop(0)
-                    if ("Info:" in com.body or "info:" in com.body) and com.id not in ids:
+                    try:
+                        com.body
+                    except:
+                        continue
+                    if com.body and ("Info:" in com.body or "info:" in com.body) and com.id not in ids:
                         print("Found Comment:" + com.id)
                         reply = ""
                         for item in m.findall(com.body)[:10]:
