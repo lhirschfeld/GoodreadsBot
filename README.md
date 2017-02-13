@@ -1,4 +1,4 @@
-# PathOfExamineBot
+# LitBot
 
 Running this script requires the following prerequisites:
  * [Python](https://www.python.org/) 3.0+
